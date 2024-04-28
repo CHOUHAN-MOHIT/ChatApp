@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#chat-container::-webkit-scrollbar{
+    width: 3px;
+}
+#chat-container::-webkit-scrollbar-thumb{
+    @apply bg-gray-400 rounded-full;
+}
+#room-list::-webkit-scrollbar{
+    width: 0;
+}

@@ -25,6 +25,9 @@ const Login = () => {
     flag = email && password;
     return flag;
   };
+  const navigateToRegister = () => {
+    navigate("/register");
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -78,46 +81,56 @@ const Login = () => {
   };
 
   return (
-    <div className="p-6">
-      <h3 className="text-center text-xl font-semibold mb-4">Login</h3>
-      <form onSubmit={handleLogin}>
-        <div className="mb-4">
-          <div className="flex items-center py-2">
-            <input
-              type="email"
-              name="email"
-              placeholder="john@mymail.com"
-              className="border rounded-md p-1 w-full focus:outline-none"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+    <div className="grid bg-white rounded-lg m-auto w-96">
+      <div className="p-6">
+        <h3 className="text-center text-xl font-semibold mb-4">Login</h3>
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <div className="flex items-center py-2">
+              <input
+                type="email"
+                name="email"
+                placeholder="john@mymail.com"
+                className="border rounded-md p-1 w-full focus:outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            {error.email && (
+              <p className="text-red-500 text-sm mt-1">{error.email}</p>
+            )}
           </div>
-          {error.email && (
-            <p className="text-red-500 text-sm mt-1">{error.email}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <div className="flex items-center py-2">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className="border rounded-md p-1 w-full focus:outline-none"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+          <div className="mb-4">
+            <div className="flex items-center py-2">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="border rounded-md p-1 w-full focus:outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {error.password && (
+              <p className="text-red-500 text-sm mt-1">{error.password}</p>
+            )}
           </div>
-          {error.password && (
-            <p className="text-red-500 text-sm mt-1">{error.password}</p>
+          <button className="bg-orange-400 font-semibold rounded-md py-2 w-full mt-4 hover:bg-orange-500 focus:outline-none">
+            Login
+          </button>
+          {error.formError && (
+            <p className="text-red-500 text-sm mt-2">{error.formError}</p>
           )}
+        </form>
+        <div className="text-center">
+          <button
+            className="py-3 underline"
+            onClick={navigateToRegister}
+          >
+            Register now
+          </button>
         </div>
-        <button className="bg-orange-400 font-semibold rounded-md py-2 w-full mt-4 hover:bg-orange-500 focus:outline-none">
-          Login
-        </button>
-        {error.formError && (
-          <p className="text-red-500 text-sm mt-2">{error.formError}</p>
-        )}
-      </form>
+      </div>
     </div>
   );
 };

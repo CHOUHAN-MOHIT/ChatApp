@@ -36,5 +36,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def create_message(self, data):
         get_room_by_name = Room.objects.get(room_name=data['room_name'])
         if not Message.objects.filter(message=data['message']).exists():
-            new_message = Message.objects.create(room=get_room_by_name, sender=data['sender'], message=data['message'])
+            new_message = Message.objects.create(room=get_room_by_name, sender=data['sender'], message=data['message'] , type=data['msgType'])
             return new_message

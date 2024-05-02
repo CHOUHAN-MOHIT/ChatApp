@@ -12,8 +12,9 @@ const Home = () => {
     }
   return (
     <div className="grid bg-white rounded-lg m-auto w-96">
-        {showRegister ? <Register/> : <Login/>}
-        <button className='py-3 underline' onClick={handleFormShow}>{showRegister ? "Already registered? Login now" : "Register now"}</button>
+      <Routes>
+            
+          </Routes>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const Register = () => {
   });
   const [rePassword, setRePassword] = useState("");
   const [rePasswordError, setRePasswordError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     isValid();
@@ -61,6 +63,10 @@ const Register = () => {
     return flag;
   };
 
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!isValid()) {
@@ -78,75 +84,84 @@ const Register = () => {
       }
 
       // Registration successful, you may redirect or handle the response as needed
-      console.log("User registered successfully");
+      navigate("/login");
     } catch (error) {
       console.error("Error registering user:", error.message);
     }
   };
 
   return (
-    <div className="p-6">
-      <h3 className="text-center font-semibold text-lg mb-4">Register</h3>
-      <form onSubmit={handleRegister}>
-        <div className="mb-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            className="border rounded-md p-1 w-full"
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          {error.name && (
-            <p className="text-red-500 text-sm mt-1">{error.name}</p>
+    <div className="grid bg-white rounded-lg m-auto w-96">
+      <div className="p-6">
+        <h3 className="text-center font-semibold text-lg mb-4">Register</h3>
+        <form onSubmit={handleRegister}>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              className="border rounded-md p-1 w-full"
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+            />
+            {error.name && (
+              <p className="text-red-500 text-sm mt-1">{error.name}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <input
+              type="email"
+              name="email"
+              placeholder="john@mymail.com"
+              className="border rounded-md p-1 w-full"
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+            {error.email && (
+              <p className="text-red-500 text-sm mt-1">{error.email}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="border rounded-md p-1 w-full"
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+            {error.password && (
+              <p className="text-red-500 text-sm mt-1">{error.password}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <input
+              type="password"
+              name="re-password"
+              placeholder="Re-Password"
+              className="border rounded-md p-1 w-full"
+              onChange={(e) => setRePassword(e.target.value)}
+            />
+            {rePasswordError && (
+              <p className="text-red-500 text-sm mt-1">{rePasswordError}</p>
+            )}
+          </div>
+          <button className="border rounded-md p-1 w-full bg-orange-400 hover:bg-orange-500 focus:outline-none font-semibold">
+            Register
+          </button>
+          {error.formError && (
+            <p className="text-red-500 text-sm mt-2">{error.formError}</p>
           )}
+        </form>
+        <div className="text-center">
+          <button className="py-3 underline" onClick={navigateToLogin}>
+            Already registered? Login now
+          </button>
         </div>
-        <div className="mb-4">
-          <input
-            type="email"
-            name="email"
-            placeholder="john@mymail.com"
-            className="border rounded-md p-1 w-full"
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-          {error.email && (
-            <p className="text-red-500 text-sm mt-1">{error.email}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="border rounded-md p-1 w-full"
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-          />
-          {error.password && (
-            <p className="text-red-500 text-sm mt-1">{error.password}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <input
-            type="password"
-            name="re-password"
-            placeholder="Re-Password"
-            className="border rounded-md p-1 w-full"
-            onChange={(e) => setRePassword(e.target.value)}
-          />
-          {rePasswordError && (
-            <p className="text-red-500 text-sm mt-1">{rePasswordError}</p>
-          )}
-        </div>
-        <button className="border rounded-md p-1 w-full bg-orange-400 hover:bg-orange-500 focus:outline-none font-semibold">
-          Register
-        </button>
-        {error.formError && (
-          <p className="text-red-500 text-sm mt-2">{error.formError}</p>
-        )}
-      </form>
+      </div>
     </div>
   );
 };

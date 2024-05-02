@@ -10,6 +10,8 @@ class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     sender = models.CharField(max_length=255)
     message = models.TextField()
+    type = models.CharField(max_length=255)
+    time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.room)

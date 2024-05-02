@@ -45,7 +45,7 @@ const Room = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("Error logging out:", error);
     }
